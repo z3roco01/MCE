@@ -13,8 +13,6 @@ void KeyboardMouseInput::Init()
 
 void KeyboardMouseInput::Tick()
 {
-	if(IsKeyDown('W'))
-		OutputDebugString("Ws in the chat brah");
 }
 
 void KeyboardMouseInput::OnKeyDown(WPARAM virtKey)
