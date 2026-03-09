@@ -336,6 +336,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// TODO: Add any drawing code here...
 		EndPaint(hWnd, &ps);
 		break;
+	case WM_CLOSE:
+		// zc - properly handle WM_CLOSE as well, according to Microsoft
+		DestroyWindow(g_hWnd);
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
