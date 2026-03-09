@@ -1,5 +1,6 @@
 # Minecraft: MCE - Modern Console Edition
-This is a modification of the Minecraft October 2014 LCE leak.
+This is a modification of the Minecraft October 2014 LCE leak.<br>
+My code might me kinda bad.... I'm not too used to C++, and have never done it on windows before, but I am learning!
 
 # Features
 - nothing right now...
