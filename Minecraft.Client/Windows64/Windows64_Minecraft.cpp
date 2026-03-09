@@ -36,6 +36,7 @@
 #include "Resource.h"
 #include "..\..\Minecraft.World\compression.h"
 #include "..\..\Minecraft.World\OldChunkStorage.h"
+#include "KeyboardMouseInput.h"
 
 #include "Xbox/resource.h"
 
@@ -314,9 +315,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	int wmId, wmEvent;
 	PAINTSTRUCT ps;
 	HDC hdc;
-
+	
 	switch (message)
 	{
+	case WM_SYSKEYDOWN:
+        break;
+    case WM_SYSKEYUP:
+        break;
+
+    case WM_KEYDOWN:
+		g_KMInput.OnKeyDown(wParam);
+        break;
+    case WM_KEYUP:
+		g_KMInput.OnKeyUp(wParam);
+        break;
+
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);
 		wmEvent = HIWORD(wParam);
@@ -393,7 +406,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);    // adjust the size
 
 	g_hWnd = CreateWindow(	"MinecraftClass",
-		"Minecraft",
+		"Minecraft: MCE",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		0,
@@ -468,6 +481,7 @@ LRESULT CALLBACK DlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 //--------------------------------------------------------------------------------------
 HRESULT InitDevice()
 {
+
 	HRESULT hr = S_OK;
 
 	RECT rc;
@@ -706,6 +720,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 #endif
 	app.loadMediaArchive();
+	
+	// zc - init keyboard + mouse input
+	g_KMInput.Init();
 
 	RenderManager.Initialise(g_pd3dDevice, g_pSwapChain);
 	
@@ -945,6 +962,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		PIXBeginNamedEvent(0,"Input manager tick");
 		InputManager.Tick();
 		PIXEndNamedEvent();
+
+		
+		PIXBeginNamedEvent(0, "Keyboard + mouse input tick");
+		g_KMInput.Tick();
+		PIXEndNamedEvent();
+
 		PIXBeginNamedEvent(0,"Profile manager tick");
 		//		ProfileManager.Tick();
 		PIXEndNamedEvent();

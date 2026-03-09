@@ -881,6 +881,7 @@
     <None Include="PSVita\Iggy\gdraw\gdraw_shared.inl">
       <Filter>PSVita\Iggy\gdraw</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -3625,6 +3626,9 @@
     <ClInclude Include="Common\UI\UIScene_Keyboard.h">
       <Filter>Common\Source Files\UI\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="KeyboardMouseInput.h">
+      <Filter>Windows64</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -5633,6 +5637,9 @@
     </ClCompile>
     <ClCompile Include="Common\UI\UIScene_Keyboard.cpp">
       <Filter>Common\Source Files\UI\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMouseInput.cpp">
+      <Filter>Windows64</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -26,8 +26,6 @@ void CConsoleMinecraftApp::StoreLaunchData()
 }
 void CConsoleMinecraftApp::ExitGame()
 {
-	// maybe fix quiting ??
-	PostQuitMessage(0);
 }
 
 void CConsoleMinecraftApp::FatalLoadError()
@@ -50,7 +48,6 @@ void CConsoleMinecraftApp::GetScreenshot(int iPad,PBYTE *pbData,DWORD *pdwSize)
 
 void CConsoleMinecraftApp::TemporaryCreateGameStart()
 {
-	std::cout << "\nhaiii\n";
 	////////////////////////////////////////////////////////////////////////////////////////////// From CScene_Main::OnInit
 
 	app.setLevelGenerationOptions(NULL);
