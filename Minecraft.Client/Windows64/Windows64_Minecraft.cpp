@@ -1191,6 +1191,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		// Fix for #7318 - Title crashes after short soak in the leaderboards menu
 		// A memory leak was caused because the icon renderer kept creating new Vec3's because the pool wasn't reset
 		Vec3::resetPool();
+
+		g_KMInput.FrameEnd();
 	}
 
 	// Free resources, unregister custom classes, and exit.

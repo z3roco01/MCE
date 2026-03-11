@@ -977,6 +977,7 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 	}
 #endif
 
+	//if(down && !(key == 17 || key == 15)) app.DebugPrintf("Down %d\n", key);
 	if(pressed) app.DebugPrintf("Pressed %d\n",key);
 	if(released) app.DebugPrintf("Released %d\n",key);
 
