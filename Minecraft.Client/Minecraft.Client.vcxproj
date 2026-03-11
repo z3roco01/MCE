@@ -8087,7 +8087,6 @@ xcopy /q /y /i /s /e $(ProjectDir)Durango\CU  $(LayoutDir)Image\Loose\CU</Comman
     <ClInclude Include="GuiMessage.h" />
     <ClInclude Include="GuiParticle.h" />
     <ClInclude Include="GuiParticles.h" />
-    <ClInclude Include="KeyboardMouseInput.h" />
     <ClInclude Include="HeartParticle.h" />
     <ClInclude Include="HttpTexture.h" />
     <ClInclude Include="HttpTextureProcessor.h" />
@@ -16135,6 +16134,8 @@ xcopy /q /y /i /s /e $(ProjectDir)Durango\CU  $(LayoutDir)Image\Loose\CU</Comman
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseForArt|Xbox 360'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ContentPackage_NO_TU|Xbox 360'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Windows64\Keybinds.h" />
+    <ClInclude Include="Windows64\KeyboardMouseInput.h" />
     <ClInclude Include="Windows64\Leaderboards\WindowsLeaderboardManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ContentPackage|Durango'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='CONTENTPACKAGE_SYMBOLS|Durango'">true</ExcludedFromBuild>
@@ -28742,7 +28743,6 @@ xcopy /q /y /i /s /e $(ProjectDir)Durango\CU  $(LayoutDir)Image\Loose\CU</Comman
     <ClCompile Include="SnowManModel.cpp" />
     <ClCompile Include="SnowManRenderer.cpp" />
     <ClCompile Include="SnowShovelParticle.cpp" />
-    <ClCompile Include="KeyboardMouseInput.cpp" />
     <ClCompile Include="SpellParticle.cpp" />
     <ClCompile Include="SpiderModel.cpp" />
     <ClCompile Include="SpiderRenderer.cpp" />
@@ -28964,6 +28964,7 @@ xcopy /q /y /i /s /e $(ProjectDir)Durango\CU  $(LayoutDir)Image\Loose\CU</Comman
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseForArt|Xbox 360'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ContentPackage_NO_TU|Xbox 360'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Windows64\KeyboardMouseInput.cpp" />
     <ClCompile Include="Windows64\Leaderboards\WindowsLeaderboardManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ContentPackage|x64'">false</ExcludedFromBuild>

@@ -11,6 +11,10 @@
 #include "..\..\EnderDragonRenderer.h"
 #include "..\..\MultiPlayerLocalPlayer.h"
 #include "UIFontData.h"
+#ifdef _WINDOWS64
+#include "..\..\Windows64\keybinds.h"
+#include "..\..\Windows64\KeyboardMouseInput.h"
+#endif
 #ifdef __PSVITA__
 #include <message_dialog.h>
 #endif
@@ -919,8 +923,63 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 	pressed = InputManager.ButtonPressed(iPad,key); // Toggle
 	released = InputManager.ButtonReleased(iPad,key); // Toggle
 
+#ifdef _WINDOWS64
+	// only do keyboard input for player one
+	if(iPad == 0) {
+		UINT virtKey = 0x100;
+		switch(key)
+		{
+		case ACTION_MENU_A: case ACTION_MENU_OK: 
+			virtKey = KB_MENU_OK; break;
+		case ACTION_MENU_B: case ACTION_MENU_CANCEL: 
+			virtKey = KB_MENU_CANCEL; break;
+		case ACTION_MENU_UP:
+			virtKey = KB_MENU_UP; break;
+		case ACTION_MENU_DOWN:
+			virtKey = KB_MENU_DOWN; break;
+		case ACTION_MENU_LEFT:
+			virtKey = KB_MENU_LEFT; break;
+		case ACTION_MENU_RIGHT:
+			virtKey = KB_MENU_RIGHT; break;	
+		case ACTION_MENU_PAGEUP:
+			virtKey = KB_MENU_PAGEUP; break;
+		case ACTION_MENU_PAGEDOWN:
+			virtKey = KB_MENU_PAGEDOWN; break;
+		case ACTION_MENU_PAUSEMENU:
+			virtKey = KB_MENU_PAUSEMENU; break;
+
+		// currently unimplemented actions, lowk no clue where most of them are used, will probably eventually find out
+		// also where is xbox's rb ( save options in the load world menu ) definined, none of these seem to be it 
+		case ACTION_MENU_RIGHT_SCROLL:
+			break;
+		case ACTION_MENU_LEFT_SCROLL:
+			break;
+		case ACTION_MENU_STICK_PRESS:
+			break;
+		case ACTION_MENU_OTHER_STICK_PRESS:
+			break;
+		case ACTION_MENU_OTHER_STICK_UP:
+			break;
+		case ACTION_MENU_OTHER_STICK_DOWN:
+			break;
+		case ACTION_MENU_OTHER_STICK_LEFT:
+			break;
+		case ACTION_MENU_OTHER_STICK_RIGHT:
+			break;
+		}
+
+		if(virtKey < 0x100) 
+		{
+			down = g_KMInput.IsKeyDown(virtKey);
+			pressed = g_KMInput.IsKeyJustPressed(virtKey);
+			released = g_KMInput.IsKeyJustReleased(virtKey);
+		}
+	}
+#endif
+
 	if(pressed) app.DebugPrintf("Pressed %d\n",key);
 	if(released) app.DebugPrintf("Released %d\n",key);
+
 	// Repeat handling
 	if(pressed)
 	{

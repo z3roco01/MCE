@@ -319,12 +319,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_SYSKEYDOWN:
-        break;
+		// default functionality
+		return DefWindowProc(hWnd, message, wParam, lParam);
     case WM_SYSKEYUP:
-        break;
+		// default functionality
+		return DefWindowProc(hWnd, message, wParam, lParam);
 
     case WM_KEYDOWN:
-		g_KMInput.OnKeyDown(wParam);
+		if(!(lParam & 0x40000000)) // if the 30th bit is set, this is a auto repeat and must be ignored
+		{
+			g_KMInput.OnKeyDown(wParam);
+		}
         break;
     case WM_KEYUP:
 		g_KMInput.OnKeyUp(wParam);
@@ -721,8 +726,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 #endif
 	app.loadMediaArchive();
 	
-	// zc - init keyboard + mouse input
-	g_KMInput.Init();
 
 	RenderManager.Initialise(g_pd3dDevice, g_pSwapChain);
 	
@@ -735,6 +738,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	// Set the number of possible joypad layouts that the user can switch between, and the number of actions
 	InputManager.Initialise(1,3,MINECRAFT_ACTION_MAX, ACTION_MAX_MENU);
+
+	
+	g_KMInput.Init();
 
 	// Set the default joypad action mappings for Minecraft
 	DefineActions();
