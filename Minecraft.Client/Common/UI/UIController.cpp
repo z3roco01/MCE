@@ -970,9 +970,9 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 
 		if(virtKey < 0x100) 
 		{
-			down = g_KMInput.IsKeyDown(virtKey);
-			pressed = g_KMInput.IsKeyJustPressed(virtKey);
-			released = g_KMInput.IsKeyJustReleased(virtKey);
+			down |= g_KMInput.IsKeyDown(virtKey);
+			pressed |= g_KMInput.IsKeyJustPressed(virtKey);
+			released |= g_KMInput.IsKeyJustReleased(virtKey);
 		}
 	}
 #endif
