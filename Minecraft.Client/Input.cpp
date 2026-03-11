@@ -7,6 +7,10 @@
 #include "Input.h"
 #include "..\Minecraft.Client\LocalPlayer.h"
 #include "Options.h"
+#ifdef _WINDOWS64
+#include "Windows64\Keybinds.h"
+#include "Windows64\KeyboardMouseInput.h"
+#endif
 
 Input::Input()
 {
@@ -39,6 +43,33 @@ void Input::tick(LocalPlayer *player)
 		ya = InputManager.GetJoypadStick_LY(iPad);
 	else
 		ya = 0.0f;
+
+#ifdef _WINDOWS64
+	// allow movement with keyboard, only for player 1
+	if(iPad == 0)
+	{
+		// keep track of keyboard acceleration, later do proper math to it and controller acceleration
+		float kbXa = 0.0f, kbYa = 0.0f;
+		if(g_KMInput.IsKeyDown(KB_ACTION_FORWARD)) kbYa += 1.0f;
+		if(g_KMInput.IsKeyDown(KB_ACTION_BACKWARD)) kbYa -= 1.0f;
+		// as above, minecraft movement is "the wrong way round, so invert x!"
+		if(g_KMInput.IsKeyDown(KB_ACTION_LEFT)) kbXa += 1.0f;
+		if(g_KMInput.IsKeyDown(KB_ACTION_RIGHT)) kbXa -= 1.0f;
+
+		// normalize movement when going diagonal
+		// values will only be -1 or 1, so can cheat by multiplying by 0.7071...., which will make sqrt(x^2, y^2) = 1
+		if(kbXa != 0.0f && kbYa != 0.0f) 
+		{
+			kbXa *= 0.7071f;
+			kbYa *= 0.7071f;
+		}
+
+		// TODO: Allow controller and keyboard movement...
+		// temporarily fully override controller movement
+		xa = kbXa;
+		ya = kbYa;
+	}
+#endif
 
 #ifndef _CONTENT_PACKAGE
 	if (app.GetFreezePlayers())
