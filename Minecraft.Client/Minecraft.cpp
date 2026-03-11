@@ -73,6 +73,11 @@
 #include "Orbis\Network\PsPlusUpsellWrapper_Orbis.h"
 #endif
 
+#ifdef _WINDOWS64
+#include "Windows64\Keybinds.h"
+#include "Windows64\KeyboardMouseInput.h"
+#endif
+
 // 4J Turning this on will change the graph at the bottom of the debug overlay to show the number of packets of each type added per fram
 //#define DEBUG_RENDER_SHOWS_PACKETS 1
 //#define SPLITSCREEN_TEST
@@ -1451,6 +1456,21 @@ void Minecraft::run_middle()
 					}
 					if(InputManager.ButtonPressed(i, MINECRAFT_ACTION_RENDER_THIRD_PERSON))		localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_RENDER_THIRD_PERSON;
 					if(InputManager.ButtonPressed(i, MINECRAFT_ACTION_GAME_INFO))				localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_GAME_INFO;
+
+#ifdef _WINDOWS64
+					// support keyboard inputs for in game inputs that are not movement
+					if(i == 0)
+					{
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_JUMP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_JUMP;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_INVENTORY)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_INVENTORY;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_PAUSEMENU)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_PAUSEMENU;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_DROP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_DROP;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_SNEAK)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_SNEAK_TOGGLE;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_RENDER_THIRD_PERSON)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_RENDER_THIRD_PERSON;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_GAME_INFO)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_GAME_INFO;
+						if(g_KMInput.IsKeyJustPressed(KB_ACTION_CRAFTING)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_CRAFTING;
+					}
+#endif
 
 #ifndef _FINAL_BUILD
 					if( app.DebugSettingsOn() && app.GetUseDPadForDebug() )
