@@ -19,6 +19,7 @@ Input::Input()
 	wasJumping = false;
 	jumping = false;
 	sneaking = false;
+	sneakingToggle = false;
 
 	lReset = false;
     rReset = false;
@@ -93,8 +94,17 @@ void Input::tick(LocalPlayer *player)
 	{
 		if((player->ullButtonsPressed&(1LL<<MINECRAFT_ACTION_SNEAK_TOGGLE)) && pMinecraft->localgameModes[iPad]->isInputAllowed(MINECRAFT_ACTION_SNEAK_TOGGLE))
 		{
-			sneaking=!sneaking;
+			sneakingToggle=!sneakingToggle;
 		}
+
+#ifdef _WINDOWS64
+		// handle sneaking on keyboard, intergrating into gamepad sneaking
+		if(iPad == 0 && g_KMInput.IsKeyDown(KB_ACTION_SNEAK)) sneaking = true;
+		else sneaking = sneakingToggle;
+#else
+		// if not on windows, bypass keyboard sneaking totally
+		sneaking = sneakingToggle
+#endif
 	}
 
 	if(sneaking)
@@ -140,6 +150,11 @@ void Input::tick(LocalPlayer *player)
 		jumping = true;
 	else
  		jumping = false;
+
+#ifdef _WINDOWS64
+	if(iPad == 0 && g_KMInput.IsKeyDown(KB_ACTION_JUMP))
+		jumping = true;
+#endif
 
 #ifndef _CONTENT_PACKAGE
 	if (app.GetFreezePlayers())	jumping = false;

@@ -10,6 +10,8 @@ public:
     bool wasJumping;
     bool jumping;
     bool sneaking;
+	// sneak toggle used by gamepad, to preserve its state
+	bool sneakingToggle;
     
 	Input();	// 4J - added
 
