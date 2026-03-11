@@ -933,6 +933,10 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 			virtKey = KB_MENU_OK; break;
 		case ACTION_MENU_B: case ACTION_MENU_CANCEL: 
 			virtKey = KB_MENU_CANCEL; break;
+		case ACTION_MENU_X:
+			virtKey = KB_MENU_X; break;
+		case ACTION_MENU_Y:
+			virtKey = KB_MENU_Y; break;
 		case ACTION_MENU_UP:
 			virtKey = KB_MENU_UP; break;
 		case ACTION_MENU_DOWN:
@@ -947,13 +951,12 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 			virtKey = KB_MENU_PAGEDOWN; break;
 		case ACTION_MENU_PAUSEMENU:
 			virtKey = KB_MENU_PAUSEMENU; break;
+		case ACTION_MENU_RIGHT_SCROLL:
+			virtKey = KB_MENU_RIGHT_SCROLL; break;
+		case ACTION_MENU_LEFT_SCROLL:
+			virtKey = KB_MENU_LEFT_SCROLL; break;
 
 		// currently unimplemented actions, lowk no clue where most of them are used, will probably eventually find out
-		// also where is xbox's rb ( save options in the load world menu ) definined, none of these seem to be it 
-		case ACTION_MENU_RIGHT_SCROLL:
-			break;
-		case ACTION_MENU_LEFT_SCROLL:
-			break;
 		case ACTION_MENU_STICK_PRESS:
 			break;
 		case ACTION_MENU_OTHER_STICK_PRESS:
