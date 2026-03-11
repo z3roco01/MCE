@@ -3,6 +3,7 @@
 # ===========================================
 x64/
 Minecraft.Client/x64/
+Minecraft.Client/Debug/
 Minecraft.World/x64_Debug/
 Minecraft.World/x64_Release/
 ipch/
