@@ -75,7 +75,7 @@
 
 #ifdef _WINDOWS64
 #include "Windows64\Keybinds.h"
-#include "Windows64\KeyboardMouseInput.h"
+#include "Windows64\KeyboardInput.h"
 #endif
 
 // 4J Turning this on will change the graph at the bottom of the debug overlay to show the number of packets of each type added per fram
@@ -1461,14 +1461,15 @@ void Minecraft::run_middle()
 					// support keyboard inputs for in game inputs that are not movement
 					if(i == 0)
 					{
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_JUMP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_JUMP;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_INVENTORY)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_INVENTORY;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_PAUSEMENU)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_PAUSEMENU;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_DROP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_DROP;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_SNEAK)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_SNEAK_TOGGLE;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_RENDER_THIRD_PERSON)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_RENDER_THIRD_PERSON;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_GAME_INFO)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_GAME_INFO;
-						if(g_KMInput.IsKeyJustPressed(KB_ACTION_CRAFTING)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_CRAFTING;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_JUMP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_JUMP;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_INVENTORY)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_INVENTORY;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_PAUSEMENU)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_PAUSEMENU;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_DROP)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_DROP;
+						// dont put sneak in buttons pressed or else itll act as toggle, obviously
+						//if(g_KbInput.IsKeyJustPressed(KB_ACTION_SNEAK)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_SNEAK_TOGGLE;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_RENDER_THIRD_PERSON)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_RENDER_THIRD_PERSON;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_GAME_INFO)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_GAME_INFO;
+						if(g_KbInput.IsKeyJustPressed(KB_ACTION_CRAFTING)) localplayers[i]->ullButtonsPressed|=1LL<<MINECRAFT_ACTION_CRAFTING;
 					}
 #endif
 
@@ -3197,6 +3198,22 @@ void Minecraft::tick(bool bFirst, bool bUpdateTextures)
 		{
 			wheel = -1;
 		}
+
+#ifdef _WINDOWS64
+		// TODO: scroll wheel...
+		// allow player to scroll between hotbar slots, and go to specific with number keys
+		if(iPad == 0)
+		{
+			for(UINT virtKey = VK_1; virtKey <= VK_9; virtKey++)
+			{
+				if(g_KbInput.IsKeyDown(virtKey))
+				{
+					
+				}
+			}
+		}
+#endif
+
 		if (wheel != 0)
 		{
 			player->inventory->swapPaint(wheel);

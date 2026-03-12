@@ -3,7 +3,7 @@
 #ifdef _WINDOWS64
 
 #include <Windows.h>
-#include "KeyboardMouseInput.h"
+#include "KeyboardInput.h"
 
 // TODO: Make reassignable in game, for now is hardcoded
 #define KB_MENU_OK VK_RETURN

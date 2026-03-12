@@ -36,7 +36,9 @@
 #include "Resource.h"
 #include "..\..\Minecraft.World\compression.h"
 #include "..\..\Minecraft.World\OldChunkStorage.h"
-#include "KeyboardMouseInput.h"
+#ifdef _WINDOWS64
+#include "KeyboardInput.h"
+#endif
 
 #include "Xbox/resource.h"
 
@@ -328,11 +330,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
 		if(!(lParam & 0x40000000)) // if the 30th bit is set, this is a auto repeat and must be ignored
 		{
-			g_KMInput.OnKeyDown(wParam);
+			g_KbInput.OnKeyDown(wParam);
 		}
         break;
     case WM_KEYUP:
-		g_KMInput.OnKeyUp(wParam);
+		g_KbInput.OnKeyUp(wParam);
         break;
 
 	case WM_COMMAND:
@@ -740,7 +742,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	InputManager.Initialise(1,3,MINECRAFT_ACTION_MAX, ACTION_MAX_MENU);
 
 	
-	g_KMInput.Init();
+	g_KbInput.Init();
 
 	// Set the default joypad action mappings for Minecraft
 	DefineActions();
@@ -971,7 +973,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 		
 		PIXBeginNamedEvent(0, "Keyboard + mouse input tick");
-		g_KMInput.Tick();
+		g_KbInput.Tick();
 		PIXEndNamedEvent();
 
 		PIXBeginNamedEvent(0,"Profile manager tick");
@@ -1192,7 +1194,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		// A memory leak was caused because the icon renderer kept creating new Vec3's because the pool wasn't reset
 		Vec3::resetPool();
 
-		g_KMInput.FrameEnd();
+		g_KbInput.FrameEnd();
 	}
 
 	// Free resources, unregister custom classes, and exit.

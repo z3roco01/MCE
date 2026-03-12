@@ -2,26 +2,26 @@
 
 #ifdef _WINDOWS64
 
-#include "KeyboardMouseInput.h"
+#include "KeyboardInput.h"
 
-KeyboardMouseInput g_KMInput;
+KeyboardInput g_KbInput;
 
-void KeyboardMouseInput::Init()
+void KeyboardInput::Init()
 {
 	m_ClearState();
 }
 
-void KeyboardMouseInput::Tick()
+void KeyboardInput::Tick()
 {
 }
 
-void KeyboardMouseInput::FrameEnd()
+void KeyboardInput::FrameEnd()
 {
 	// copy current state into previous
 	memcpy_s(m_prevKeysDown, sizeof(m_prevKeysDown), m_keysDown, sizeof(m_keysDown));
 }
 
-void KeyboardMouseInput::OnKeyDown(WPARAM virtKey)
+void KeyboardInput::OnKeyDown(WPARAM virtKey)
 {
 	// ensure it doesnt get some bad value
 	if(virtKey >= 0x100) return;
@@ -30,7 +30,7 @@ void KeyboardMouseInput::OnKeyDown(WPARAM virtKey)
 	m_keysDown[virtKey] = true;
 }
 
-void KeyboardMouseInput::OnKeyUp(WPARAM virtKey)
+void KeyboardInput::OnKeyUp(WPARAM virtKey)
 {
 	// ensure it doesnt get some bad value
 	if(virtKey >= 0x100) return;
@@ -39,7 +39,7 @@ void KeyboardMouseInput::OnKeyUp(WPARAM virtKey)
 	m_keysDown[virtKey] = false;
 }
 
-bool KeyboardMouseInput::IsKeyDown(UINT virtKey) 
+bool KeyboardInput::IsKeyDown(UINT virtKey) 
 {
 	// always return key is up if it is out of bounds
 	if(virtKey >= 0x100) return false;
@@ -47,14 +47,14 @@ bool KeyboardMouseInput::IsKeyDown(UINT virtKey)
 	return m_keysDown[virtKey];
 }
 
-bool KeyboardMouseInput::IsKeyJustPressed(UINT virtKey)
+bool KeyboardInput::IsKeyJustPressed(UINT virtKey)
 {
 	if(virtKey >= 0x100) return false;
 	// if the key was just pressed ( last frame was up )
 	return m_keysDown[virtKey] && !m_prevKeysDown[virtKey];
 }
 
-bool KeyboardMouseInput::IsKeyJustReleased(UINT virtKey)
+bool KeyboardInput::IsKeyJustReleased(UINT virtKey)
 {
 	if(virtKey >= 0x100) return false;
 	// if the key was just release ( last frame was down )
@@ -62,7 +62,7 @@ bool KeyboardMouseInput::IsKeyJustReleased(UINT virtKey)
 }
 
 
-void KeyboardMouseInput::m_ClearState()
+void KeyboardInput::m_ClearState()
 {
 	// set all keys and their previous state to up
 	memset(m_keysDown, false, sizeof(m_keysDown));

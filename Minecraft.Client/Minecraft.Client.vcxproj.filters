@@ -3626,10 +3626,10 @@
     <ClInclude Include="Common\UI\UIScene_Keyboard.h">
       <Filter>Common\Source Files\UI\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Windows64\KeyboardMouseInput.h">
+    <ClInclude Include="Windows64\Keybinds.h">
       <Filter>Windows64</Filter>
     </ClInclude>
-    <ClInclude Include="Windows64\Keybinds.h">
+    <ClInclude Include="Windows64\KeyboardInput.h">
       <Filter>Windows64</Filter>
     </ClInclude>
   </ItemGroup>
@@ -5641,7 +5641,7 @@
     <ClCompile Include="Common\UI\UIScene_Keyboard.cpp">
       <Filter>Common\Source Files\UI\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Windows64\KeyboardMouseInput.cpp">
+    <ClCompile Include="Windows64\KeyboardInput.cpp">
       <Filter>Windows64</Filter>
     </ClCompile>
   </ItemGroup>

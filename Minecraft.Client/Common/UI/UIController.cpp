@@ -13,7 +13,7 @@
 #include "UIFontData.h"
 #ifdef _WINDOWS64
 #include "..\..\Windows64\keybinds.h"
-#include "..\..\Windows64\KeyboardMouseInput.h"
+#include "..\..\Windows64\KeyboardInput.h"
 #endif
 #ifdef __PSVITA__
 #include <message_dialog.h>
@@ -973,9 +973,9 @@ void UIController::handleKeyPress(unsigned int iPad, unsigned int key)
 
 		if(virtKey < 0x100) 
 		{
-			down |= g_KMInput.IsKeyDown(virtKey);
-			pressed |= g_KMInput.IsKeyJustPressed(virtKey);
-			released |= g_KMInput.IsKeyJustReleased(virtKey);
+			down |= g_KbInput.IsKeyDown(virtKey);
+			pressed |= g_KbInput.IsKeyJustPressed(virtKey);
+			released |= g_KbInput.IsKeyJustReleased(virtKey);
 		}
 	}
 #endif

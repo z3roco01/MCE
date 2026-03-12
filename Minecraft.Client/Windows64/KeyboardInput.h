@@ -4,7 +4,7 @@
 
 #include <windows.h>
 
-class KeyboardMouseInput
+class KeyboardInput
 {
 public:
 	void Init();
@@ -69,6 +69,6 @@ private:
 #define VK_Z 'Z'
 
 // globally accessibly input object
-extern KeyboardMouseInput g_KMInput;
+extern KeyboardInput g_KbInput;
 
 #endif
